@@ -1,0 +1,4 @@
+*.swp
+/install/
+build
+*.o
