@@ -18,11 +18,11 @@ Prefix:		@@PREFIX@@
 make %{?_smp_mflags}
 
 %install
-make install DESTDIR=%{buildroot}/usr
+make install DESTDIR=%{buildroot}@@PREFIX@@
 
 %files
-%attr(4755, root, root) /usr/bin/pyraw
-%attr(-, -, -) /usr/lib/python/icmpecho*
+%attr(4755, root, root) @@PREFIX@@/bin/pyraw
+%attr(-, -, -) @@PREFIX@@/lib/python/icmpecho*
 
 %changelog
 
