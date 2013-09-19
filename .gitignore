@@ -1,4 +1,5 @@
 *.swp
 /install/
+icmpecho/pyraw
 build
 *.o

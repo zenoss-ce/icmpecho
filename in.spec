@@ -1,5 +1,5 @@
 Name:		icmpecho
-Version:	1.0.0
+Version:	@@VERSION@@
 Release:	1%{?dist}
 Summary:	Packet encode/decode of ICMPv4/6 echo and reply.
 
@@ -7,7 +7,7 @@ Group:		zenoss
 License:	Commercial
 URL:		http://www.zenoss.com/
 Source:		%{name}-%{version}.tar.gz
-Prefix:		/usr
+Prefix:		@@PREFIX@@
 
 %description
 

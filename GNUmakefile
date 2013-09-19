@@ -2,7 +2,8 @@
 
 PROJECT = icmpecho
 SOURCES = ~/rpmbuild/SOURCES
-VERSION = $(shell grep Version $(PROJECT).spec | cut -f 2)
+VERSION = 1.0.0
+PREFIX = /usr
 SOURCE_TAR = $(SOURCES)/$(PROJECT)-$(VERSION).tar.gz
 DIST_TAR = $(PROJECT)-$(VERSION)-`uname -m`.tar.gz
 DESTDIR=$(shell pwd)/install
@@ -13,7 +14,10 @@ sdist: $(SOURCE_TAR)
 
 dist: $(DIST_TAR)
 
-rpm: sdist
+$(PROJECT).spec: in.spec
+	sed in.spec -e 's/@@VERSION@@/$(VERSION)/' | sed -e 's/@@PREFIX@@/$(subst /,\/,$(PREFIX))/' >| $(PROJECT).spec
+
+rpm: sdist $(PROJECT).spec
 	rpmbuild -ba $(PROJECT).spec
 
 $(SOURCES):
@@ -33,3 +37,4 @@ clean:
 	rm -rf $(DESTDIR)
 	rm -f $(DIST_TAR)
 	rm -f $(SOURCE_TAR)
+	rm -f $(PROJECT).spec
