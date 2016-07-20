@@ -19,4 +19,5 @@ clean-pyraw:
 build-pyraw: $(PYRAW_BINARY)
 
 $(PYRAW_BINARY): $(PYRAW_SRC)
+	@echo "Compiling $(PYRAW_BINARY)"
 	$(DOCKER_RUN) "cd /mnt && $(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(PYRAW_SRC) -o $@"

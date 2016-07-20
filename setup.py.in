@@ -4,7 +4,7 @@ from setuptools import setup, find_packages, Extension
 
 setup(
     name = "icmpecho",
-    version = "1.0.1-dev",
+    version = "%VERSION%",
     packages=find_packages(),
     install_requires = [
         'setuptools',
