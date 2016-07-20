@@ -1,5 +1,7 @@
 *.swp
-/install/
-icmpecho/pyraw
+/dist/
+pyraw/pyraw
+icmpecho.egg-info
 build
+setup.py
 *.o
