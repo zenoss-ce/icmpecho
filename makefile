@@ -34,7 +34,7 @@ setup.py:
 build: build-bdist build-pyraw
 
 clean: clean-pyraw
-	rm -rf *.pyc MANIFEST dist build icmpecho.egg-info
+	rm -rf setup.py *.pyc MANIFEST dist build icmpecho.egg-info
 
 #
 # Bundle up the wheel and the pyraw binary into a tar artifact
