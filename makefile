@@ -1,7 +1,7 @@
 #
 # Makefile for icmpecho
 #
-VERSION = 1.0.1-dev
+VERSION = 1.0.1
 
 # Define the image name, version and tag name for the docker build image
 BUILD_IMAGE = build-tools
