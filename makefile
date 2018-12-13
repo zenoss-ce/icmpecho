@@ -17,24 +17,31 @@ DOCKER_RUN := docker run --rm \
 		$(TAG) \
 		/bin/bash -c
 
+IN_DOCKER = 1
+
 include pyraw.mk
 
 build-bdist: setup.py
-	@echo "Building a binary distribution of icmpecho"
-	$(DOCKER_RUN) "cd /mnt && python setup.py bdist_wheel"
+	@echo "Building a binary distribution of icmpecho $(IN_DOCKER)"
+	if [ -n "$(IN_DOCKER)" ]; then \
+		$(DOCKER_RUN) "cd /mnt && python setup.py bdist_wheel"; \
+	else \
+		python setup.py bdist_wheel; \
+	fi
 
 build-sdist: setup.py
 	@echo "Building a source distribution of icmpecho"
-	$(DOCKER_RUN) "cd /mnt && python setup.py sdist"
-
-setup.py:
-	@sed -e "s/%VERSION%/$(VERSION)/g" < setup.py.in > setup.py
+	if [ -n "$(IN_DOCKER)" ]; then \
+		$(DOCKER_RUN) "cd /mnt && python setup.py sdist"; \
+	else \
+		python setup.py sdist; \
+	fi
 
 # Default to building a binary distribution of the wheel
 build: build-bdist build-pyraw
 
 clean: clean-pyraw
-	rm -rf setup.py *.pyc MANIFEST dist build icmpecho.egg-info
+	rm -rf *.pyc MANIFEST dist build icmpecho.egg-info
 
 #
 # Bundle up the wheel and the pyraw binary into a tar artifact
