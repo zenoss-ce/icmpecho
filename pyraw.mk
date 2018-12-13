@@ -20,4 +20,8 @@ build-pyraw: $(PYRAW_BINARY)
 
 $(PYRAW_BINARY): $(PYRAW_SRC)
 	@echo "Compiling $(PYRAW_BINARY)"
-	$(DOCKER_RUN) "cd /mnt && $(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(PYRAW_SRC) -o $@"
+	if [ -n "$(IN_DOCKER)" ]; then \
+		$(DOCKER_RUN) "cd /mnt && $(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(PYRAW_SRC) -o $@"; \
+	else \
+		$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(PYRAW_SRC) -I/usr/include/python2.7/ -o $@; \
+	fi
