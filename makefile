@@ -40,6 +40,9 @@ build-sdist: setup.py
 # Default to building a binary distribution of the wheel
 build: build-bdist build-pyraw
 
+setup.py:
+	@sed -e "s/%VERSION%/$(VERSION)/g" < setup.py.in > setup.py
+
 clean: clean-pyraw
 	rm -rf *.pyc MANIFEST dist build icmpecho.egg-info
 
